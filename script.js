@@ -1,44 +1,22 @@
 $(document).ready(function () {
-    // Open modal when "Sign Up" button is clicked
     $("#openModalBtn").click(function () {
-        console.log("Sign Up button clicked, opening modal...");
-        $("#signupModal").modal("show"); // Show modal
+        $("#signupModal").modal("show");
     });
 
-    // Log when modal is shown
-    $('#signupModal').on('shown.bs.modal', function () {
-        console.log("Modal is fully visible!");
-        $(this).css("display", "block"); // Ensure it's visible (for Cypress)
-    });
-
-    // Log when modal is hidden
-    $('#signupModal').on('hidden.bs.modal', function () {
-        console.log("Modal is now hidden!");
-    });
-
-    // Handle form submission using AJAX
     $("#signupForm").submit(function (event) {
-        event.preventDefault(); // Prevent default form submission
-        
-        // Get form data
-        var formData = {
-            email: $("#emailInput").val(),
-            password: $("#passwordInput").val(),
-            confirmPassword: $("#confirmPasswordInput").val()
-        };
+        event.preventDefault();
+        var email = $("#emailInput").val();
+        var password = $("#passwordInput").val();
+        var confirmPassword = $("#confirmPasswordInput").val();
 
-        console.log("Sending AJAX request with:", formData);
-
-        // **Validate passwords**
-        if (formData.password !== formData.confirmPassword) {
+        if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
 
-        // Simulate a successful signup response
         setTimeout(function () {
             alert("Signup Successful!");
-            $("#signupModal").modal("hide"); // Close modal on success
+            $("#signupModal").modal("hide");
         }, 1000);
     });
 });
